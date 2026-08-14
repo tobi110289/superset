@@ -10,7 +10,6 @@ import { useTheme } from "renderer/stores/theme";
 
 interface WorkspaceEmptyStateProps {
 	onOpenBrowser: () => void;
-	onOpenChat: () => void;
 	onOpenChatV3?: (() => void) | undefined;
 	onOpenQuickOpen: () => void;
 	onOpenTerminal: () => void;
@@ -26,14 +25,12 @@ interface WorkspaceEmptyStateAction {
 
 export function WorkspaceEmptyState({
 	onOpenBrowser,
-	onOpenChat,
 	onOpenChatV3,
 	onOpenQuickOpen,
 	onOpenTerminal,
 }: WorkspaceEmptyStateProps) {
 	const activeTheme = useTheme();
 	const { keys: newGroupDisplay } = useHotkeyDisplay("NEW_GROUP");
-	const { keys: newChatDisplay } = useHotkeyDisplay("NEW_CHAT");
 	const { keys: newBrowserDisplay } = useHotkeyDisplay("NEW_BROWSER");
 	const { keys: quickOpenDisplay } = useHotkeyDisplay("QUICK_OPEN");
 
@@ -45,13 +42,6 @@ export function WorkspaceEmptyState({
 				display: newGroupDisplay,
 				icon: BsTerminalPlus,
 				onClick: onOpenTerminal,
-			},
-			{
-				id: "chat",
-				label: "Open Chat",
-				display: newChatDisplay,
-				icon: TbMessageCirclePlus,
-				onClick: onOpenChat,
 			},
 			...(onOpenChatV3
 				? [
@@ -81,10 +71,8 @@ export function WorkspaceEmptyState({
 		],
 		[
 			newBrowserDisplay,
-			newChatDisplay,
 			newGroupDisplay,
 			onOpenBrowser,
-			onOpenChat,
 			onOpenChatV3,
 			onOpenQuickOpen,
 			onOpenTerminal,
